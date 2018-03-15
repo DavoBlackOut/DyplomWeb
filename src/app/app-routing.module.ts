@@ -4,7 +4,6 @@ import { AccountComponent } from './account/account.component';
 import { UserPageComponent } from './user-page/user-page.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DialogsComponent } from './dialogs/dialogs.component';
-import { LanguageComponent } from './language/language.component';
 import { UserSearchComponent } from './user-search/user-search.component';
 
 const routes: Routes = [
@@ -14,7 +13,6 @@ const routes: Routes = [
   { path: 'Registration', component: RegistrationComponent },
   { path: 'Dialogs', component: DialogsComponent },
   { path: 'Dialogs/:id', component: DialogsComponent },
-  { path: 'Languages', component: LanguageComponent },
   { path: 'Search', component: UserSearchComponent }
 ];
 

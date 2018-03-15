@@ -20,16 +20,6 @@
             </select>
           </div>
         </div>
-        <div class="form-group">
-          <div class="col-10">
-            <select [(ngModel)]="filter.language" (input)="onFilterChange();" name="languages" class="form-control">
-              <option>All</option>
-              <option *ngFor="let language of languages">
-                {{ language.linkToImage }}
-              </option>
-            </select>
-          </div>
-        </div>
       </div>
     </form>
   </div>
@@ -44,9 +34,6 @@
             Username
           </th>
           <th style="text-align: center;">
-            KnownLanguages
-          </th>
-          <th style="text-align: center;">
             Country
           </th>
         </tr>
@@ -55,23 +42,13 @@
       <tbody id="UpdateTargetId">
         <tr *ngFor="let user of users" (click)="selectUser(user)" class="User" data-toggle="modal" data-target="#ModalUserInfo">
           <td style="text-align: center;">
-            <img class="round" style="max-width: 40%; max-height: 40%" [src]="user.hasPhoto ?
-                '/api/manage/getPhoto?Id=' + user.userId :
-                '/assets/images/default-avatar.png'" />
+            <img class="round" style="max-width: 40%; max-height: 40%" [src]="'/assets/images/default-avatar.png'" />
           </td>
           <td style="text-align: center;">
             {{ user.name }}
           </td>
           <td style="text-align: center;">
-            <ul>
-              <li *ngFor="let language of user.knownLanguages" style="list-style-type: none; text-align: left;">
-                <img width="20" class="img-fluid" style="display:inline-block" [src]="'/api/languages/getLanguagePicture?Id=' + language.languageId"
-                  alt="@LinkToImage" /> {{ language.title }}
-              </li>
-            </ul>
-          </td>
-          <td style="text-align: center;">
-            Country
+            {{ user.country?.title }}
           </td>
         </tr>
       </tbody>
@@ -90,9 +67,7 @@
         <div class="modal-body">
           <div class="row">
             <div align="center" class="col-12">
-              <img width="200" class="rounded" [src]="selectedUser.hasPhoto ?
-                '/api/manage/getPhoto?Id=' + selectedUser.userId :
-                '/assets/images/default-avatar.png'" />
+              <img width="200" class="rounded" [src]="'/assets/images/default-avatar.png'" />
             </div>
             <div align="center" class="col-12">
               <dl class="dl-horizontal">
@@ -118,28 +93,6 @@
 
                 <dd>
                   Country
-                </dd>
-
-                <dt *ngIf="selectedUser.knownLanguages && selectedUser.knownLanguages.length > 0">
-                  Known languages
-                </dt>
-
-                <dd *ngIf="selectedUser.knownLanguages && selectedUser.knownLanguages.length > 0">
-                  <div *ngFor="let language of selectedUser.knownLanguages" style="display:inline-block">
-                    <img width="50" class="img-fluid" style="display:inline-block" [src]="'/api/languages/getLanguagePicture?Id=' + language.languageId"
-                      alt="@LinkToImage" /> {{ language.title }}
-                  </div>
-                </dd>
-
-                <dt *ngIf="selectedUser.learnLanguages && selectedUser.learnLanguages.length > 0">
-                  Learning languages
-                </dt>
-
-                <dd *ngIf="selectedUser.learnLanguages && selectedUser.learnLanguages.length > 0">
-                    <div *ngFor="let language of selectedUser.learnLanguages" style="display:inline-block">
-                        <img width="50" class="img-fluid" style="display:inline-block" [src]="'/api/languages/getLanguagePicture?Id=' + language.languageId"
-                          alt="@LinkToImage" /> {{ language.title }}
-                      </div>
                 </dd>
 
               </dl>

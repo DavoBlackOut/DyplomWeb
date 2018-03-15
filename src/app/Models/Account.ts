@@ -1,5 +1,5 @@
 import { Message } from './Message';
-import { Language } from './Language';
+import { Country } from './Country';
 
 export class Account {
     public accountId: number;
@@ -12,11 +12,8 @@ export class Account {
 
     public email: string;
 
-    public hasPhoto: boolean;
-
-    constructor() {
-        this.hasPhoto = false;
-    }
+    public countryId: number;
+    public country = new Country();
 }
 
 export class User {
@@ -27,13 +24,6 @@ export class User {
 
     public email: string;
 
-    public hasPhoto: boolean;
-
-    public knownLanguages: Array<Language>;
-    public learnLanguages: Array<Language>;
-
-    constructor() {
-        this.knownLanguages = new Array<Language>();
-        this.learnLanguages = new Array<Language>();
-    }
+    public countryId: number;
+    public country = new Country();
 }

@@ -15,10 +15,9 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { ManageService } from './manage.service';
 import { DialogsComponent } from './dialogs/dialogs.component';
 import { UsersService } from './users.service';
-import { LanguageComponent } from './language/language.component';
-import { LanguageService } from './language.service';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { CountriesService } from './countries.service';
 
 
 @NgModule({
@@ -28,7 +27,6 @@ import { NavigationComponent } from './navigation/navigation.component';
     UserPageComponent,
     RegistrationComponent,
     DialogsComponent,
-    LanguageComponent,
     UserSearchComponent,
     NavigationComponent
   ],
@@ -43,7 +41,7 @@ import { NavigationComponent } from './navigation/navigation.component';
     RegistrationService,
     ManageService,
     UsersService,
-    LanguageService,
+    CountriesService,
     CookieService
   ],
   bootstrap: [AppComponent]

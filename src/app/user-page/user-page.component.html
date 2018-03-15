@@ -10,9 +10,7 @@
           <div align="center">
             <div class="image-upload">
               <label for="file-input">
-                <img class="img-fluid" [src]="account.hasPhoto ?
-                      '/api/manage/getPhoto?Id=' + account.accountId :
-                      '/assets/images/default-avatar.png'" />
+                <img class="img-fluid" [src]="'/assets/images/default-avatar.png'" />
               </label>
 
               <input style="display: none;" id="file-input" type="file" (change)="fileChange($event)" accept=".png,.jpg" />
@@ -28,6 +26,8 @@
             <dd>{{ account.surname }}</dd>
             <dt>Email: </dt>
             <dd>{{ account.email }}</dd>
+            <dt>Country: </dt>
+            <dd>{{ account.country?.title }}</dd>
           </dl>
         </div>
       </div>
@@ -58,9 +58,6 @@
           </li>
           <li class="list-group-item list-group-item-action">
             <a class="btn btn-default" routerLink="/Dialogs">Dialogs</a>
-          </li>
-          <li class="list-group-item list-group-item-action">
-            <a class="btn btn-default" routerLink="/Languages">Languages</a>
           </li>
         </ul>
       </div>

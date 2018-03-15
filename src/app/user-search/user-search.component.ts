@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { SearchModel } from '../Models/SearchModel';
 import { UsersService } from '../users.service';
 import { User } from '../Models/Account';
-import { LanguageService } from '../language.service';
-import { Language } from '../Models/Language';
+import { CountriesService } from '../countries.service';
 
 @Component({
   selector: 'app-user-search',
@@ -14,20 +13,17 @@ export class UserSearchComponent implements OnInit {
 
   filter: SearchModel;
   users: Array<User>;
-  languages: Array<Language>;
   selectedUser: User;
 
   status: string;
 
   constructor(private usersService: UsersService,
-    private languageService: LanguageService) {
+    private countriesService: CountriesService) {
     this.filter = new SearchModel();
     this.status = '1';
     this.selectedUser = new User();
 
     this.users = new Array<User>();
-
-    this.languageService.getLanguages().subscribe(data => this.languages = data);
 
     this.onFilterChange();
   }
@@ -38,9 +34,8 @@ export class UserSearchComponent implements OnInit {
   onFilterChange() {
     this.usersService.getUsers(this.filter).subscribe(data => {
       this.users = data;
-
       this.users.forEach(user => {
-        this.languageService.getKnownLanguages(user).subscribe(languages => user.knownLanguages = languages);
+        this.countriesService.getCountry(user.countryId).subscribe(country => user.country = country);
       });
     });
   }
@@ -51,8 +46,6 @@ export class UserSearchComponent implements OnInit {
 
   selectUser(user: User) {
     this.selectedUser = user;
-
-    this.languageService.getLearnLanguages(this.selectedUser).subscribe(data => this.selectedUser.learnLanguages = data);
   }
 
 }

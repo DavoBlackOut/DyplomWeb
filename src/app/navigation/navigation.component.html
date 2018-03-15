@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-md navbar-dark bg-dark">
-  <a class="navbar-brand" routerLink="/">Languar</a>
+  <a class="navbar-brand" routerLink="/UserPage">Languar</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
     aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -12,9 +12,6 @@
       </li>
       <li class="nav-item">
         <a class="nav-link" [class.active]="router.url==='/Dialogs'" routerLink="/Dialogs">Dialogs</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" [class.active]="router.url==='/Languages'" routerLink="/Languages">Languages</a>
       </li>
       <li class="nav-item">
         <a class="nav-link disabled" [routerLink]="router.url">Smart Search</a>

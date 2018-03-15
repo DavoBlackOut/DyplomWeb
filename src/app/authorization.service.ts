@@ -14,7 +14,7 @@ export class AuthorizationService {
   loginAccount(account: Account): Observable<Account> {
     const body = { login: account.login, password: account.password };
 
-    return this.http.post<Account>('/api/accounts/login', body);
+    return this.http.post<Account>('/api/Accounts/Login', body);
   }
 
   getAccount(): Observable<Account> {
