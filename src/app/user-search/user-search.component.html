@@ -1,0 +1,157 @@
+<h2>Search</h2>
+
+<hr />
+<div class="row">
+  <div class="col-4">
+    <form>
+      <div class="form-horizontal">
+        <div class="form-group">
+          <div class="col-10">
+            <input type="text" [(ngModel)]="filter.searchString" (input)="onFilterChange();" name="searchString" class="form-control"
+              placeholder="Search" autocomplete="off" />
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-10">
+            <select [(ngModel)]="filter.sex" (input)="onFilterChange();" name="sex" class="form-control">
+              <option>All</option>
+              <option>Male</option>
+              <option>Female</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-10">
+            <select [(ngModel)]="filter.language" (input)="onFilterChange();" name="languages" class="form-control">
+              <option>All</option>
+              <option *ngFor="let language of languages">
+                {{ language.linkToImage }}
+              </option>
+            </select>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="col-8 table-responsive">
+    <table class="table table-hover" (scroll)="scrolling();">
+      <thead>
+        <tr>
+          <th style="text-align: center;">
+            Image
+          </th>
+          <th style="text-align: center;">
+            Username
+          </th>
+          <th style="text-align: center;">
+            KnownLanguages
+          </th>
+          <th style="text-align: center;">
+            Country
+          </th>
+        </tr>
+      </thead>
+
+      <tbody id="UpdateTargetId">
+        <tr *ngFor="let user of users" (click)="selectUser(user)" class="User" data-toggle="modal" data-target="#ModalUserInfo">
+          <td style="text-align: center;">
+            <img class="round" style="max-width: 40%; max-height: 40%" [src]="user.hasPhoto ?
+                '/api/manage/getPhoto?Id=' + user.userId :
+                '/assets/images/default-avatar.png'" />
+          </td>
+          <td style="text-align: center;">
+            {{ user.name }}
+          </td>
+          <td style="text-align: center;">
+            <ul>
+              <li *ngFor="let language of user.knownLanguages" style="list-style-type: none; text-align: left;">
+                <img width="20" class="img-fluid" style="display:inline-block" [src]="'/api/languages/getLanguagePicture?Id=' + language.languageId"
+                  alt="@LinkToImage" /> {{ language.title }}
+              </li>
+            </ul>
+          </td>
+          <td style="text-align: center;">
+            Country
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="ModalUserInfo" class="modal fade bd-example-modal-lg" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <label class="text-info">User Information</label>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div align="center" class="col-12">
+              <img width="200" class="rounded" [src]="selectedUser.hasPhoto ?
+                '/api/manage/getPhoto?Id=' + selectedUser.userId :
+                '/assets/images/default-avatar.png'" />
+            </div>
+            <div align="center" class="col-12">
+              <dl class="dl-horizontal">
+                <dt>
+                  Name:
+                </dt>
+
+                <dd>
+                  {{ selectedUser.name }}
+                </dd>
+
+                <dt>
+                  Email:
+                </dt>
+
+                <dd>
+                  {{ selectedUser.email }}
+                </dd>
+
+                <dt>
+                  Country:
+                </dt>
+
+                <dd>
+                  Country
+                </dd>
+
+                <dt *ngIf="selectedUser.knownLanguages && selectedUser.knownLanguages.length > 0">
+                  Known languages
+                </dt>
+
+                <dd *ngIf="selectedUser.knownLanguages && selectedUser.knownLanguages.length > 0">
+                  <div *ngFor="let language of selectedUser.knownLanguages" style="display:inline-block">
+                    <img width="50" class="img-fluid" style="display:inline-block" [src]="'/api/languages/getLanguagePicture?Id=' + language.languageId"
+                      alt="@LinkToImage" /> {{ language.title }}
+                  </div>
+                </dd>
+
+                <dt *ngIf="selectedUser.learnLanguages && selectedUser.learnLanguages.length > 0">
+                  Learning languages
+                </dt>
+
+                <dd *ngIf="selectedUser.learnLanguages && selectedUser.learnLanguages.length > 0">
+                    <div *ngFor="let language of selectedUser.learnLanguages" style="display:inline-block">
+                        <img width="50" class="img-fluid" style="display:inline-block" [src]="'/api/languages/getLanguagePicture?Id=' + language.languageId"
+                          alt="@LinkToImage" /> {{ language.title }}
+                      </div>
+                </dd>
+
+              </dl>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <a routerLink="/Dialogs/{{ selectedUser.userId }}" class="btn btn-primary" data-dismiss="modal">Send message</a>
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>

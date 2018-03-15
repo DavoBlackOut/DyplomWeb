@@ -1,0 +1,114 @@
+.selected {
+    background-color: #CFD8DC !important;
+    color: white;
+}
+
+/* Messages */
+.message-block {
+    margin-bottom: 10px;
+}
+
+.message-block span {
+    max-width: 60%;
+    word-wrap: break-word;
+    display: inline-block;
+    padding: 7px 10px;
+    text-align: left;
+    border-radius: 10px;
+}
+
+.message-block.text-left span {
+    background-color: azure;
+}
+
+.message-block.text-right span {
+    background-color: azure;
+}
+
+.isnt-readed {
+    background-color: rgb(240, 240, 240);
+}
+
+#Messages {
+    height: 75vh;
+}
+
+#Users {
+    max-height: 100%;
+    overflow-y: scroll;
+    border: 1px solid rgba(42, 63, 61, 0.13);
+}
+
+#messagesBody {
+    max-height: 100%;
+    overflow-y: scroll;
+    border: 1px solid rgba(183, 255, 248, 0.253);
+}
+
+.sendMessageForm .form-group {
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.main-form {
+    border-top: 1px solid #f6f6f6;
+    margin-top: 20px;
+    padding-top: 10px;
+}
+
+.chat-input {
+    position: relative;
+}
+
+.send-custom {
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+    position: absolute;
+}
+
+.photo-send {
+    position: absolute;
+    bottom: 0;
+    right: 90px;
+}
+
+.voice-send {
+    position: absolute;
+    bottom: 0;
+    right: 50px;
+}
+
+.attachment-send {
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+}
+
+.photo-send .chat-photo-image {
+    background: url("/assets/images/messages/photo-camera.png") 50% no-repeat;
+    display: block;
+    width: 24px;
+    height: 24px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.voice-send .voice-send-image {
+    background: url("/assets/images/messages/speaker.png") 50% no-repeat;
+    display: block;
+    width: 24px;
+    height: 24px;
+    opacity: 0.7;
+    cursor: pointer;
+}
+
+.attachment-send .attachment-send-image {
+    background: url("/assets/images/messages/upload-1.png") 50% no-repeat;
+    display: block;
+    width: 24px;
+    height: 24px;
+    opacity: 0.7;
+    cursor: pointer;
+}

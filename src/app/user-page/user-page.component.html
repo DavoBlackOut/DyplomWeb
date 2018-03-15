@@ -1,0 +1,69 @@
+<div class="card card-default">
+  <div class="card-header">
+    <h4 style="display: inline-block;">Details</h4>
+    <button style="float: right;" class="btn btn-danger" (click)="signOut();">Sign out</button>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div *ngIf="account" class="col-4">
+        <div class="card">
+          <div align="center">
+            <div class="image-upload">
+              <label for="file-input">
+                <img class="img-fluid" [src]="account.hasPhoto ?
+                      '/api/manage/getPhoto?Id=' + account.accountId :
+                      '/assets/images/default-avatar.png'" />
+              </label>
+
+              <input style="display: none;" id="file-input" type="file" (change)="fileChange($event)" accept=".png,.jpg" />
+            </div>
+          </div>
+
+          <br />
+
+          <dl>
+            <dt>Name: </dt>
+            <dd>{{ account.name }}</dd>
+            <dt>Surname: </dt>
+            <dd>{{ account.surname }}</dd>
+            <dt>Email: </dt>
+            <dd>{{ account.email }}</dd>
+          </dl>
+        </div>
+      </div>
+      <div class="col-5">
+        <div class="card card-default">
+          <div class="card-body">
+            <div contenteditable="true" style="display: inline-block; width: 80%;">
+              {{ userStatus }}
+            </div>
+            <button style="float: right;" type="button" (click)="saveStatus();" class="btn btn-default btn-sm">
+              <span class="glyphicon glyphicon-edit"></span> Save
+            </button>
+          </div>
+        </div>
+        <div id="Notifications">
+          <div class="alert alert-warning alert-dismissible fade show" role="alert">
+            <strong>Holy guacamole!</strong> You should check in on some of those fields below.
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-3">
+        <ul class="list-group">
+          <li class="list-group-item list-group-item-action">
+            <a class="btn btn-default" routerLink="/Search">Search user</a>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <a class="btn btn-default" routerLink="/Dialogs">Dialogs</a>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <a class="btn btn-default" routerLink="/Languages">Languages</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

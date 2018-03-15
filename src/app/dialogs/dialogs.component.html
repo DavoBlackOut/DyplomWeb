@@ -1,0 +1,70 @@
+<div class="row">
+  <div id="Users" class="col-4">
+    <table class="table">
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td [class.selected]="this.selectedUser === user" (click)="onSelect(user)">
+            <img
+              width="20%"
+              class="img-fluid"
+              [src]="user.hasPhoto ?
+                '/api/manage/getPhoto?Id=' + user.userId :
+                '/assets/images/default-avatar.png'"
+              style="display: inline-block;" />
+            <div style="display: inline-block">{{ user.name + ' ' + user.surname }}</div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div *ngIf="selectedUser && message" class="col-8">
+    <div>
+      <div>
+        <div class="form-horizontal sendMessageForm">
+            <div class="form-group">
+                <div class="chat-input">
+                  <div>
+                    <div class="row">
+                        <div class="col-11">
+                          <input type="text" class="form-control" [(ngModel)]="message.text" placeholder="Message" autocomplete="off" />  
+                        </div>
+                        <div class="col-1">
+                          <button class="btn btn-success" (click)="sendMessage();">Send</button>
+                        </div>
+                    </div>
+                  </div>
+                    <!--<div class="photo-send">
+                        <label for="Image" class="chat-photo-image"></label>
+                        <input id="Image" name="Image" class="send-custom" type="file" accept="image/*" />
+                    </div>
+                    <div class="voice-send">
+                        <label for="Voice" class="voice-send-image"></label>
+                        <input id="Voice" name="Voice" class="send-custom" type="file" accept="audio/*" />                    
+                    </div>
+                    <div class="attachment-send">
+                        <label for="Attachment" class="attachment-send-image"></label>
+                        <input id="Attachment" name="Attachment" class="send-custom" type="file" />
+                    </div>-->
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div id="Messages">
+      <div id="messagesBody" (scroll)="scrolling($event);">
+        <div
+          class="message-block"
+          [class.isnt-readed]="message.readTime === null"
+          [class.text-right]="user.accountId === message.senderId"
+          [class.text-left]="user.accountId != message.senderId"
+          *ngFor="let message of messages">
+          <span [title]='message.sendTime'>
+            {{ message.text }}
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+{{ status }}
+</div>

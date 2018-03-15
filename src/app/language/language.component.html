@@ -1,0 +1,58 @@
+<div class="row">
+    <div class="col-6">
+        <div *ngIf="knownLanguages && knownLanguages.length > 0" class="card">
+            <div class="card-header">
+                <h3>Known</h3>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let language of knownLanguages" class="well well-sm" style="display: inline-block; width: 30%;">
+                    <img [src]="'/api/languages/getLanguagePicture?id=' + language.languageId" style="display: inline-block;" class="img-responsive"
+                        width="20px" />
+                    <div style="display: inline-block;">{{ language.title }}</div>
+                    <button class="btn btn-danger btn-sm" style="float: right;" (click)="remove(language)">X</button>
+                </div>
+            </div>
+        </div>
+        <div *ngIf="learnLanguages && learnLanguages.length > 0" class="card">
+            <div class="card-header">
+                <h3>Learning</h3>
+            </div>
+            <div class="card-body">
+                <div *ngFor="let language of learnLanguages" class="well well-sm" style="display: inline-block; width: 30%;">
+                    <img [src]="'/api/languages/getLanguagePicture?id=' + language.languageId" style="display: inline-block;" class="img-responsive"
+                        width="20px" />
+                    <div style="display: inline-block;">{{ language.title }}</div>
+                    <button class="btn btn-danger btn-sm" style="float: right;" (click)="remove(language)">X</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-6">
+        <table *ngIf="restLanguages && restLanguages.length > 0" class="table" id="UpdateTargetId">
+            <tr>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Image
+                </th>
+                <th></th>
+            </tr>
+
+            <tr *ngFor="let language of restLanguages">
+                <td>
+                    {{ language.title }}
+                </td>
+                <td>
+                    <img [src]="'/api/languages/getLanguagePicture?id=' + language.languageId" style="display: inline-block;" class="img-fluid"
+                        width="20px" />
+                </td>
+                <td>
+                    <button style="display: inline-block;" class="btn btn-default" (click)="add(language, 'Known')">Add to known</button>
+                    <button class="btn btn-default" (click)="add(language, 'Learn')">Add to learn</button>
+                </td>
+            </tr>
+
+        </table>
+    </div>
+</div>

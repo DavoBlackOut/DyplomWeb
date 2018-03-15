@@ -1,0 +1,35 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+  <a class="navbar-brand" routerLink="/">Languar</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+    aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="router.url==='/UserPage'" routerLink="/UserPage">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="router.url==='/Dialogs'" routerLink="/Dialogs">Dialogs</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" [class.active]="router.url==='/Languages'" routerLink="/Languages">Languages</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link disabled" [routerLink]="router.url">Smart Search</a>
+      </li>
+    </ul>
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        Dropdown
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+        <a class="dropdown-item" href="#">Action</a>
+        <a class="dropdown-item" href="#">Another action</a>
+        <a class="dropdown-item" href="#">Something else here</a>
+      </div>
+    </div>
+  </div>
+</nav>
