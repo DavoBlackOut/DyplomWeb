@@ -19,6 +19,7 @@ export class DialogsComponent implements OnInit {
   selectedUser: User = null;
   message: Message;
   messages: Array<Message>;
+  ws = new WebSocket('ws://localhost:5000/ws');
 
   status: string;
   page: number;
@@ -31,6 +32,14 @@ export class DialogsComponent implements OnInit {
     private location: Location) {
     this.messages = new Array<Message>();
     this.status = '';
+
+    this.ws.onmessage = (response) => {
+      const receivedMessage = response.data as Message;
+
+      if (receivedMessage.getterId === this.user.accountId && receivedMessage.getterId === receivedMessage.senderId) {
+        this.messages.unshift(receivedMessage);
+      }
+    };
   }
 
   ngOnInit() {
@@ -77,6 +86,9 @@ export class DialogsComponent implements OnInit {
       .usersService
       .sendMessage(this.message)
       .subscribe(data => {
+
+        this.ws.send(JSON.stringify(this.message));
+
         this.messages.unshift(data);
         this.message = new Message(this.selectedUser.userId);
       });

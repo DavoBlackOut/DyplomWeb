@@ -3,6 +3,9 @@ import { Account } from '../Models/Account';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthorizationService } from '../authorization.service';
+import { MessageWebSocketService } from '../message-web-socket.service';
+import { Subject } from 'rxjs/Subject';
+import { Message } from '../Models/Message';
 
 @Component({
   selector: 'app-account',
