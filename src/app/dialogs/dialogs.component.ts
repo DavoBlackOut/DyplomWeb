@@ -21,10 +21,12 @@ export class DialogsComponent implements OnInit {
   messages: Array<Message>;
   ws = new WebSocket('ws://localhost:5000/ws');
 
-  status: string;
+  status: any;
   page: number;
 
   isLoadedNewMessages = true;
+
+  audio: any;
 
   constructor(private usersService: UsersService,
     private authorizationService: AuthorizationService,
@@ -34,10 +36,13 @@ export class DialogsComponent implements OnInit {
     this.status = '';
 
     this.ws.onmessage = (response) => {
-      const receivedMessage = response.data as Message;
+      const receivedMessageObject = JSON.parse(response.data);
+      const receivedMessage = Message.ConvertToMessage(receivedMessageObject);
 
-      if (receivedMessage.getterId === this.user.accountId && receivedMessage.getterId === receivedMessage.senderId) {
+      if (this.selectedUser.userId === receivedMessage.senderId) {
         this.messages.unshift(receivedMessage);
+      } else {
+
       }
     };
   }

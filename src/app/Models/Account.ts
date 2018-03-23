@@ -14,6 +14,8 @@ export class Account {
 
     public countryId: number;
     public country = new Country();
+
+    public hasPhoto: boolean;
 }
 
 export class User {
@@ -26,4 +28,6 @@ export class User {
 
     public countryId: number;
     public country = new Country();
+
+    public hasPhoto: boolean;
 }

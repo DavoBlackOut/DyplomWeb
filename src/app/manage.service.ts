@@ -9,14 +9,14 @@ export class ManageService {
 
   constructor(private http: HttpClient) { }
 
-  changePhoto(event: any): Observable<ResponseText> {
+  changePhoto(event: any): Observable<any> {
     const fileList: FileList = event.target.files;
     const file: File = fileList[0];
 
     const formData: FormData = new FormData();
-    formData.append('File', file, file.name);
+    formData.append('Photo', file, file.name);
 
-    return this.http.post<ResponseText>('/api/manage/changePhoto', formData);
+    return this.http.post('/api/Accounts/changePhoto', formData);
   }
 
 }
