@@ -18,6 +18,7 @@ import { UsersService } from './users.service';
 import { UserSearchComponent } from './user-search/user-search.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { CountriesService } from './countries.service';
+import { PostsService } from './posts.service';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { CountriesService } from './countries.service';
     ManageService,
     UsersService,
     CountriesService,
+    PostsService,
     CookieService
   ],
   bootstrap: [AppComponent]

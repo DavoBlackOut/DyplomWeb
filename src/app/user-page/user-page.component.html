@@ -14,7 +14,8 @@
                   '/assets/images/default-avatar.png'" />
               </label>
 
-              <input style="display: none;" id="file-input" type="file" (change)="fileChange($event)" accept=".png,.jpg" />
+              <input *ngIf="id === 0" style="display: none;" id="file-input" type="file" (change)="fileChange($event)" accept=".png,.jpg"
+              />
             </div>
           </div>
 
@@ -50,6 +51,28 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
+        </div>
+        <hr />
+        <div *ngIf="id === 0">
+          <div class="row">
+            <div class="col-9">
+              <input type="text" class="form-control" [(ngModel)]="newPost.content" #post="ngModel" id="post" name="post" placeholder="What's new?" />
+            </div>
+            <div class="col-3">
+              <button (click)="sendPost();" class="btn btn-primary" style="float: right;">Send</button>
+            </div>
+          </div>
+        </div>
+        <br />
+        <div class="list-group">
+          <a *ngFor="let post of account?.Posts" class="list-group-item list-group-item-action flex-column align-items-start">
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"></h5>
+              <small>{{ post.createdTime }}</small>
+            </div>
+            <p class="mb-1">{{ post.content }}</p>
+            <small></small>
+          </a>
         </div>
       </div>
       <div class="col-3">

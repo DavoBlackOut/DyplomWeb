@@ -17,8 +17,8 @@ export class AuthorizationService {
     return this.http.post<Account>('/api/Accounts/Login', body);
   }
 
-  getAccount(): Observable<Account> {
-    return this.http.get<Account>('/api/accounts/getAccount');
+  getAccount(id?: number): Observable<Account> {
+    return this.http.get<Account>('/api/accounts/getAccount' + (id === null ? '' : '?id=' + id));
   }
 
   signOut(): void {

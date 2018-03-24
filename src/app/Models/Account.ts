@@ -1,5 +1,6 @@
 import { Message } from './Message';
 import { Country } from './Country';
+import { Post } from './Post';
 
 export class Account {
     public accountId: number;
@@ -16,6 +17,8 @@ export class Account {
     public country = new Country();
 
     public hasPhoto: boolean;
+
+    public Posts: Array<Post>;
 }
 
 export class User {

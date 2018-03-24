@@ -10,6 +10,7 @@ const routes: Routes = [
   { path: '', redirectTo: '/Account', pathMatch: 'full' },
   { path: 'Account', component: AccountComponent },
   { path: 'UserPage', component: UserPageComponent },
+  { path: 'UserPage/:id', component: UserPageComponent },
   { path: 'Registration', component: RegistrationComponent },
   { path: 'Dialogs', component: DialogsComponent },
   { path: 'Dialogs/:id', component: DialogsComponent },
