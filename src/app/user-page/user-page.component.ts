@@ -73,4 +73,10 @@ export class UserPageComponent implements OnInit {
     });
   }
 
+  deletePost(post: Post) {
+    this.postsService.deletePost(post).subscribe();
+
+    this.account.Posts = this.account.Posts.filter(x => x.postId !== post.postId);
+  }
+
 }

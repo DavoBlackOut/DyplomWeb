@@ -18,4 +18,8 @@ export class PostsService {
     return this.http.post<Post>('/api/Posts/SendPost', body);
   }
 
+  deletePost(post: Post): Observable<any> {
+    return this.http.delete('/api/Posts/DeletePost?Id=' + post.postId);
+  }
+
 }

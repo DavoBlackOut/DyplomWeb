@@ -5,7 +5,7 @@
         <div class="form-group">
           <label for="login">Login</label>
           <input [(ngModel)]="account.login" #login="ngModel" type="text" class="form-control" name="login" id="login" placeholder="Login"
-            required />
+            required autocomplete="off" />
           <small id="loginHelp" class="form-text text-muted">We'll never share your information with anyone else.</small>
         </div>
 

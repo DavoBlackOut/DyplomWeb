@@ -56,10 +56,11 @@
         <div *ngIf="id === 0">
           <div class="row">
             <div class="col-9">
-              <input type="text" class="form-control" [(ngModel)]="newPost.content" #post="ngModel" id="post" name="post" placeholder="What's new?" />
+              <input type="text" class="form-control" [(ngModel)]="newPost.content" #post="ngModel" id="post" name="post" placeholder="What's new?"
+                autocomplete="off" />
             </div>
             <div class="col-3">
-              <button (click)="sendPost();" class="btn btn-primary" style="float: right;">Send</button>
+              <button (click)="sendPost();" class="btn btn-outline-primary" style="float: right;">Send</button>
             </div>
           </div>
         </div>
@@ -68,7 +69,9 @@
           <a *ngFor="let post of account?.Posts" class="list-group-item list-group-item-action flex-column align-items-start">
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1"></h5>
-              <small>{{ post.createdTime }}</small>
+              <small>{{ post.createdTime }}
+                <div class="btn btn-danger btn-sm" (click)="deletePost(post);">X</div>
+              </small>
             </div>
             <p class="mb-1">{{ post.content }}</p>
             <small></small>
