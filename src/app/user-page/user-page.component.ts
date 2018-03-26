@@ -20,6 +20,10 @@ export class UserPageComponent implements OnInit {
 
   userStatus: string;
 
+  private page = 0;
+
+  private isLoadedNewPosts = false;
+
   readonly id = +this.route.snapshot.paramMap.get('id');
 
   constructor(private authorizationService: AuthorizationService,
@@ -32,7 +36,7 @@ export class UserPageComponent implements OnInit {
     this.authorizationService.getAccount(this.id).subscribe(data => {
       this.account = data;
       this.countriesService.getCountry(this.account.countryId).subscribe(country => this.account.country = country);
-      this.postsService.getPosts(this.id).subscribe(Posts => this.account.Posts = Posts);
+      this.postsService.getPosts(this.account).subscribe(Posts => this.account.Posts = Posts);
     });
 
     this.userStatus = 'User status';
@@ -77,6 +81,28 @@ export class UserPageComponent implements OnInit {
     this.postsService.deletePost(post).subscribe();
 
     this.account.Posts = this.account.Posts.filter(x => x.postId !== post.postId);
+  }
+
+  loadMore(event: Event) {
+    if (this.isLoadedNewPosts) {
+
+      const scrollLength = event.srcElement.scrollTop + event.srcElement.parentElement.offsetHeight - 2;
+
+      if (scrollLength >= event.srcElement.scrollHeight) {
+        this.isLoadedNewPosts = false;
+
+        // Load new messages
+        this.page = this.page + 1;
+
+        this.postsService.getPosts(this.account).subscribe(data => {
+          for (let i = 0; i < data.length; i++) {
+            this.account.Posts.push(data[i]);
+          }
+
+          this.isLoadedNewPosts = true;
+        });
+      }
+    }
   }
 
 }

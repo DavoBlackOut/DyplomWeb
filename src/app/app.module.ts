@@ -19,6 +19,7 @@ import { UserSearchComponent } from './user-search/user-search.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { CountriesService } from './countries.service';
 import { PostsService } from './posts.service';
+import { WebSocketStatePipe } from './web-socket-state.pipe';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { PostsService } from './posts.service';
     RegistrationComponent,
     DialogsComponent,
     UserSearchComponent,
-    NavigationComponent
+    NavigationComponent,
+    WebSocketStatePipe
   ],
   imports: [
     BrowserModule,

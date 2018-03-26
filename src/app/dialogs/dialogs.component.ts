@@ -21,7 +21,6 @@ export class DialogsComponent implements OnInit {
   messages: Array<Message>;
   ws = new WebSocket('ws://localhost:5000/ws');
 
-  status: any;
   page: number;
 
   isLoadedNewMessages = true;
@@ -33,16 +32,16 @@ export class DialogsComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location) {
     this.messages = new Array<Message>();
-    this.status = '';
 
-    this.ws.onmessage = (response) => {
+    this.ws.onmessage = this.newMethod();
+  }
+
+  private newMethod(): (this: WebSocket, ev: MessageEvent) => any {
+    return (response) => {
       const receivedMessageObject = JSON.parse(response.data);
       const receivedMessage = Message.ConvertToMessage(receivedMessageObject);
-
-      if (this.selectedUser.userId === receivedMessage.senderId) {
+      if (this.user.accountId !== receivedMessage.senderId) {
         this.messages.unshift(receivedMessage);
-      } else {
-
       }
     };
   }
@@ -99,7 +98,11 @@ export class DialogsComponent implements OnInit {
       });
   }
 
-  scrolling(event: Event) {
+  CloseWebSocket() {
+    this.ws.close();
+  }
+
+  loadMore(event: Event) {
     if (this.isLoadedNewMessages) {
 
       const scrollLength = event.srcElement.scrollTop + event.srcElement.parentElement.offsetHeight - 2;

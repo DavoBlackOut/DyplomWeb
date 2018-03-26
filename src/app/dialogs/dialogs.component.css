@@ -1,5 +1,5 @@
 .selected {
-    background-color: #CFD8DC !important;
+    background-color: rgb(147, 196, 185) !important;
     color: white;
 }
 
@@ -26,7 +26,7 @@
 }
 
 .isnt-readed {
-    background-color: rgb(240, 240, 240);
+    background-color: rgba(158, 154, 154, 0.308);
 }
 
 #Messages {
