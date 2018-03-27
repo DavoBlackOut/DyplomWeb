@@ -70,7 +70,7 @@
             <div class="d-flex w-100 justify-content-between">
               <h5 class="mb-1"></h5>
               <small>{{ post.createdTime }}
-                <div class="btn btn-danger btn-sm" (click)="deletePost(post);">X</div>
+                <div *ngIf="id === 0" class="btn btn-danger btn-sm" (click)="deletePost(post);">X</div>
               </small>
             </div>
             <p class="mb-1">{{ post.content }}</p>
@@ -84,7 +84,7 @@
             <a class="btn btn-default" routerLink="/Search">Search user</a>
           </li>
           <li class="list-group-item list-group-item-action">
-            <a class="btn btn-default" routerLink="/Dialogs">Dialogs</a>
+            <a class="btn btn-default" routerLink="/Dialogs">Dialogs <span class="badge badge-dark">{{ unreadedMessagesCount }}</span></a>
           </li>
         </ul>
       </div>

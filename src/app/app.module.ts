@@ -20,6 +20,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { CountriesService } from './countries.service';
 import { PostsService } from './posts.service';
 import { WebSocketStatePipe } from './web-socket-state.pipe';
+import { MessagesService } from './messages.service';
 
 
 @NgModule({
@@ -46,6 +47,7 @@ import { WebSocketStatePipe } from './web-socket-state.pipe';
     UsersService,
     CountriesService,
     PostsService,
+    MessagesService,
     CookieService
   ],
   bootstrap: [AppComponent]

@@ -8,7 +8,9 @@
           <td [class.selected]="this.selectedUser === user" (click)="onSelect(user)">
             <img width="20%" class="img-fluid rounded-circle" [src]="user.hasPhoto ? '/api/Accounts/GetPhoto?Id=' + user.userId :
                   '/assets/images/default-avatar.png'" style="display: inline-block;" />
-            <div style="display: inline-block">{{ user.name + ' ' + user.surname }}</div>
+            <div style="display: inline-block">{{ user.name + ' ' + user.surname }}
+              <span class="badge badge-dark">{{ user.unreadedMessagesCount }}</span>
+            </div>
           </td>
         </tr>
       </tbody>

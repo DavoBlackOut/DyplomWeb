@@ -33,4 +33,6 @@ export class User {
     public country = new Country();
 
     public hasPhoto: boolean;
+
+    public unreadedMessagesCount: number;
 }

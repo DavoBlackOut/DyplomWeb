@@ -47,6 +47,7 @@
           </td>
           <td style="text-align: center;">
             {{ user.name }}
+            {{ user.surname }}
           </td>
           <td style="text-align: center;">
             {{ user.country?.title }}
@@ -79,6 +80,7 @@
 
                   <dd>
                     {{ selectedUser.name }}
+                    {{ selectedUser.surname }}
                   </dd>
 
                   <dt>
@@ -102,11 +104,11 @@
             </div>
           </div>
           <div class="modal-footer">
+            <a routerLink="/UserPage/{{ selectedUser.userId }}" class="btn btn-light" data-dismiss="modal">View Profile</a>
             <a routerLink="/Dialogs/{{ selectedUser.userId }}" class="btn btn-primary" data-dismiss="modal">Send message</a>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
-
       </div>
     </div>
   </div>

@@ -7,6 +7,7 @@ import { ManageService } from '../manage.service';
 import { CountriesService } from '../countries.service';
 import { PostsService } from '../posts.service';
 import { Post } from '../Models/Post';
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-user-page',
@@ -20,6 +21,8 @@ export class UserPageComponent implements OnInit {
 
   userStatus: string;
 
+  unreadedMessagesCount: number;
+
   private page = 0;
 
   private isLoadedNewPosts = false;
@@ -30,6 +33,7 @@ export class UserPageComponent implements OnInit {
     private manageService: ManageService,
     private countriesService: CountriesService,
     private postsService: PostsService,
+    private messagesService: MessagesService,
     private router: Router,
     private route: ActivatedRoute) {
 
@@ -38,6 +42,8 @@ export class UserPageComponent implements OnInit {
       this.countriesService.getCountry(this.account.countryId).subscribe(country => this.account.country = country);
       this.postsService.getPosts(this.account).subscribe(Posts => this.account.Posts = Posts);
     });
+
+    this.messagesService.getUnreadedMessagesCount().subscribe(data => this.unreadedMessagesCount = data);
 
     this.userStatus = 'User status';
     this.newPost = new Post();

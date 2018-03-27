@@ -6,6 +6,7 @@ import { AuthorizationService } from '../authorization.service';
 import { SearchModel } from '../Models/SearchModel';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
+import { MessagesService } from '../messages.service';
 
 @Component({
   selector: 'app-dialogs',
@@ -29,14 +30,15 @@ export class DialogsComponent implements OnInit {
 
   constructor(private usersService: UsersService,
     private authorizationService: AuthorizationService,
+    private messagesService: MessagesService,
     private route: ActivatedRoute,
     private location: Location) {
     this.messages = new Array<Message>();
 
-    this.ws.onmessage = this.newMethod();
+    this.ws.onmessage = this.OnWebSocketMessageEvent();
   }
 
-  private newMethod(): (this: WebSocket, ev: MessageEvent) => any {
+  private OnWebSocketMessageEvent(): (this: WebSocket, ev: MessageEvent) => any {
     return (response) => {
       const receivedMessageObject = JSON.parse(response.data);
       const receivedMessage = Message.ConvertToMessage(receivedMessageObject);
@@ -57,6 +59,10 @@ export class DialogsComponent implements OnInit {
       .getUsers(new SearchModel())
       .subscribe(data => {
         this.users = data;
+
+        this.users.forEach(x =>
+          this.messagesService.getUnreadedMessagesCountFromUser(x)
+            .subscribe(messagesCount => x.unreadedMessagesCount = messagesCount));
 
         const id = +this.route.snapshot.paramMap.get('id');
 
