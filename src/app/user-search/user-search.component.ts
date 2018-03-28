@@ -3,6 +3,7 @@ import { SearchModel } from '../Models/SearchModel';
 import { UsersService } from '../users.service';
 import { User } from '../Models/Account';
 import { CountriesService } from '../countries.service';
+import { Country } from '../Models/Country';
 
 @Component({
   selector: 'app-user-search',
@@ -13,6 +14,7 @@ export class UserSearchComponent implements OnInit {
 
   filter: SearchModel;
   users: Array<User>;
+  countries: Array<Country>;
   selectedUser: User;
 
   status: string;
@@ -24,6 +26,8 @@ export class UserSearchComponent implements OnInit {
     this.selectedUser = new User();
 
     this.users = new Array<User>();
+
+    this.countriesService.getCountries().subscribe(data => this.countries = data);
 
     this.onFilterChange();
   }

@@ -1,112 +1,113 @@
-<h2>Search</h2>
-
-<hr />
-<div class="row">
-  <div class="col-4">
-    <form>
-      <div class="form-horizontal">
-        <div class="form-group">
-          <div class="col-10">
-            <input type="text" [(ngModel)]="filter.searchString" (input)="onFilterChange();" name="searchString" class="form-control"
-              placeholder="Search" autocomplete="off" />
-          </div>
-        </div>
-        <div class="form-group">
-          <div class="col-10">
-            <select [(ngModel)]="filter.sex" (input)="onFilterChange();" name="sex" class="form-control">
-              <option>All</option>
-              <option>Male</option>
-              <option>Female</option>
-            </select>
-          </div>
-        </div>
-      </div>
-    </form>
+<div class="card">
+  <div class="card-header bg-light">
+    <h4>Search</h4>
   </div>
-  <div class="col-8 table-responsive">
-    <table class="table table-hover" (scroll)="scrolling();">
-      <thead>
-        <tr>
-          <th style="text-align: center;">
-            Image
-          </th>
-          <th style="text-align: center;">
-            Username
-          </th>
-          <th style="text-align: center;">
-            Country
-          </th>
-        </tr>
-      </thead>
-
-      <tbody id="UpdateTargetId">
-        <tr *ngFor="let user of users" (click)="selectUser(user)" class="User" data-toggle="modal" data-target="#ModalUserInfo">
-          <td style="text-align: center;">
-            <img class="rounded-circle" style="max-width: 120px; max-height: 120px" [src]="user.hasPhoto ? '/api/Accounts/GetPhoto?Id=' + user.userId :
-            '/assets/images/default-avatar.png'" />
-          </td>
-          <td style="text-align: center;">
-            {{ user.name }}
-            {{ user.surname }}
-          </td>
-          <td style="text-align: center;">
-            {{ user.country?.title }}
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div id="ModalUserInfo" class="modal fade bd-example-modal-lg" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <label class="text-info">User Information</label>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div align="center" class="col-12">
-              <img width="200" class="rounded" [src]="selectedUser.hasPhoto ? '/api/Accounts/GetPhoto?Id=' + selectedUser.userId :
-              '/assets/images/default-avatar.png'" />
-              <div align="center" class="col-12">
-                <dl class="">
-                  <dt>
-                    Name:
-                  </dt>
-
-                  <dd>
-                    {{ selectedUser.name }}
-                    {{ selectedUser.surname }}
-                  </dd>
-
-                  <dt>
-                    Email:
-                  </dt>
-
-                  <dd>
-                    {{ selectedUser.email }}
-                  </dd>
-
-                  <dt>
-                    Country:
-                  </dt>
-
-                  <dd>
-                    {{ selectedUser?.country?.title }}
-                  </dd>
-
-                </dl>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-4">
+        <form>
+          <div class="form-horizontal">
+            <div class="form-group">
+              <div class="col-10">
+                <input type="text" [(ngModel)]="filter.searchString" (input)="onFilterChange();" name="searchString" class="form-control"
+                  placeholder="Search" autocomplete="off" />
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="col-10">
+                <select [(ngModel)]="filter.country.countryId" (change)="onFilterChange();" name="country" class="form-control">
+                  <option value="0">All</option>
+                  <option *ngFor="let country of countries" [value]="country.countryId">{{ country.title }}</option>
+                </select>
               </div>
             </div>
           </div>
-          <div class="modal-footer">
-            <a routerLink="/UserPage/{{ selectedUser.userId }}" class="btn btn-light" data-dismiss="modal">View Profile</a>
-            <a routerLink="/Dialogs/{{ selectedUser.userId }}" class="btn btn-primary" data-dismiss="modal">Send message</a>
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </form>
+      </div>
+      <div class="col-8 table-responsive">
+        <table class="table table-hover" (scroll)="scrolling();">
+          <thead>
+            <tr>
+              <th style="text-align: center;">
+                Image
+              </th>
+              <th style="text-align: center;">
+                Username
+              </th>
+              <th style="text-align: center;">
+                Country
+              </th>
+            </tr>
+          </thead>
+
+          <tbody id="UpdateTargetId">
+            <tr *ngFor="let user of users" (click)="selectUser(user)" class="User" data-toggle="modal" data-target="#ModalUserInfo">
+              <td style="text-align: center;">
+                <img class="rounded-circle" style="max-width: 120px; max-height: 120px" [src]="user.hasPhoto ? '/api/Accounts/GetPhoto?Id=' + user.userId :
+            '/assets/images/default-avatar.png'" />
+              </td>
+              <td style="text-align: center;">
+                {{ user.name }} {{ user.surname }}
+              </td>
+              <td style="text-align: center;">
+                {{ user.country?.title }}
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div id="ModalUserInfo" class="modal fade bd-example-modal-lg" role="dialog" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <label class="text-info">User Information</label>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                <div align="center" class="col-12">
+                  <img width="200" class="rounded" [src]="selectedUser.hasPhoto ? '/api/Accounts/GetPhoto?Id=' + selectedUser.userId :
+              '/assets/images/default-avatar.png'" />
+                  <div align="center" class="col-12">
+                    <dl class="">
+                      <dt>
+                        Name:
+                      </dt>
+
+                      <dd>
+                        {{ selectedUser.name }} {{ selectedUser.surname }}
+                      </dd>
+
+                      <dt>
+                        Email:
+                      </dt>
+
+                      <dd>
+                        {{ selectedUser.email }}
+                      </dd>
+
+                      <dt>
+                        Country:
+                      </dt>
+
+                      <dd>
+                        {{ selectedUser?.country?.title }}
+                      </dd>
+
+                    </dl>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <a routerLink="/UserPage/{{ selectedUser.userId }}" class="btn btn-light" data-dismiss="modal">View Profile</a>
+                <a routerLink="/Dialogs/{{ selectedUser.userId }}" class="btn btn-primary" data-dismiss="modal">Send message</a>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>

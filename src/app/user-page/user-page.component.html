@@ -1,5 +1,5 @@
-<div class="card card-default">
-  <div class="card-header">
+<div class="card">
+  <div class="card-header text-white bg-primary">
     <h4 style="display: inline-block;">Details</h4>
     <button style="float: right;" class="btn btn-danger" (click)="signOut();">Sign out</button>
   </div>
@@ -81,10 +81,13 @@
       <div class="col-3">
         <ul class="list-group">
           <li class="list-group-item list-group-item-action">
-            <a class="btn btn-default" routerLink="/Search">Search user</a>
+            <a class="btn" routerLink="/Search">Search user</a>
           </li>
           <li class="list-group-item list-group-item-action">
-            <a class="btn btn-default" routerLink="/Dialogs">Dialogs <span class="badge badge-dark">{{ unreadedMessagesCount }}</span></a>
+            <a class="btn" routerLink="/Dialogs">Dialogs <span class="badge badge-dark">{{ unreadedMessagesCount }}</span></a>
+          </li>
+          <li class="list-group-item list-group-item-action">
+            <a class="btn" routerLink="/Manage">Preferences</a>
           </li>
         </ul>
       </div>

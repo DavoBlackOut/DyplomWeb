@@ -19,12 +19,8 @@ export class UsersService {
         link = link + 'searchstring=' + filter.searchString;
       }
 
-      if (filter.sex && filter.sex !== 'All') {
-        link = link + '&sex=' + filter.sex;
-      }
-
-      if (filter.language && filter.language !== 'All') {
-        link = link + '&language=' + filter.language;
+      if (filter.country) {
+        link = link + '&Country=' + filter.country.countryId;
       }
     }
 

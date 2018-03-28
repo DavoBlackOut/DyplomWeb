@@ -1,11 +1,14 @@
+import { Country } from './Country';
+
 export class SearchModel {
     public searchString: string;
     public sex: string;
-    public language: string;
+    public country: Country;
 
     constructor() {
         this.searchString = '';
         this.sex = 'All';
-        this.language = 'All';
+        this.country = new Country();
+        this.country.title = 'All';
     }
 }
