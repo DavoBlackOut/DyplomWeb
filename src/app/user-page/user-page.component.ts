@@ -64,9 +64,7 @@ export class UserPageComponent implements OnInit {
     this
       .manageService
       .changePhoto(event)
-      .subscribe();
-
-    window.location.reload();
+      .subscribe(data => window.location.reload());
   }
 
   saveStatus() {
