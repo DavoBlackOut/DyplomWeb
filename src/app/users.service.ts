@@ -27,7 +27,7 @@ export class UsersService {
     return this.http.get<Array<User>>(link);
   }
 
-  getDialog(user: User, page: number): Observable<Array<Message>> {
+  getDialog(user: User, page = 0): Observable<Array<Message>> {
     return this
       .http
       .get<Array<Message>>

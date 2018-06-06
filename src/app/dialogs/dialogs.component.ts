@@ -21,11 +21,13 @@ export class DialogsComponent implements OnInit {
   message: Message;
   messages: Array<Message>;
   ws = new WebSocket('ws://localhost:5000/ws');
+  // ws = new WebSocket('ws://ec2-18-191-55-98.us-east-2.compute.amazonaws.com/ws');
 
   page: number;
 
   isLoadedNewMessages = true;
 
+  debug: string;
   audio: any;
 
   constructor(private usersService: UsersService,
@@ -36,6 +38,8 @@ export class DialogsComponent implements OnInit {
     this.messages = new Array<Message>();
 
     this.ws.onmessage = this.OnWebSocketMessageEvent();
+    this.ws.onclose = x => {
+    };
   }
 
   private OnWebSocketMessageEvent(): (this: WebSocket, ev: MessageEvent) => any {
@@ -43,6 +47,7 @@ export class DialogsComponent implements OnInit {
       const receivedMessageObject = JSON.parse(response.data);
       const receivedMessage = Message.ConvertToMessage(receivedMessageObject);
       if (this.user.accountId !== receivedMessage.senderId) {
+        receivedMessage.readTime = new Date();
         this.messages.unshift(receivedMessage);
       }
     };
@@ -81,13 +86,14 @@ export class DialogsComponent implements OnInit {
 
     this
       .usersService
-      .getDialog(this.selectedUser, 0)
+      .getDialog(this.selectedUser)
       .subscribe(data => {
         this.messages = data;
 
         this.message = new Message(this.selectedUser.userId);
 
         this.page = 0;
+        this.selectedUser.unreadedMessagesCount = 0;
       });
   }
 
@@ -102,10 +108,6 @@ export class DialogsComponent implements OnInit {
         this.messages.unshift(data);
         this.message = new Message(this.selectedUser.userId);
       });
-  }
-
-  CloseWebSocket() {
-    this.ws.close();
   }
 
   loadMore(event: Event) {
