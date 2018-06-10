@@ -21,6 +21,13 @@ export class AuthorizationService {
     return this.http.get<Account>('/api/accounts/getAccount' + (id === null ? '' : '?id=' + id));
   }
 
+  updateAccount(account: Account): Observable<Account> {
+    const body = { password: account.password,
+      name: account.name, surname: account.surname, email: account.email, countryId: account.countryId };
+
+    return this.http.put<Account>('/api/Accounts/UpdateAccount', body);
+  }
+
   signOut(): void {
     this.cookieService.remove('AccountId');
 

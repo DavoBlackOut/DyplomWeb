@@ -31,9 +31,11 @@ export class RegistrationComponent implements OnInit {
     this.registrationService.registerAccount(this.account).subscribe(data => {
       try {
         this.status = data.response;
+        this.status = 'OK';
         alert('Succesfull registration');
         this.account = new Account();
       } catch {
+        this.status = 'Fail';
         alert('Failed registration');
       }
     });

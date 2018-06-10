@@ -1,0 +1,42 @@
+<div class="">
+  <div [ngClass]="['alert', status == 'OK' ? 'alert-info' : 'aler-danger']" *ngIf="status">{{ status }}</div>
+
+  <form #manageForm="ngForm" (ngSubmit)="updateSubmit()">
+    <div>
+      <div class="form-group">
+        <label for="password">Password: </label>
+        <input [(ngModel)]="account.password" #password="ngModel" type="password" class="form-control" name="password" id="password"
+          placeholder="Password" required />
+      </div>
+
+      <div class="form-group">
+        <label for="login">Name: </label>
+        <input [(ngModel)]="account.name" #name="ngModel" type="text" class="form-control" name="name" id="name" placeholder="Name"
+          required />
+      </div>
+
+      <div class="form-group">
+        <label for="login">Surname: </label>
+        <input [(ngModel)]="account.surname" #surname="ngModel" type="text" class="form-control" name="surname" id="surname" placeholder="Surname"
+          required />
+      </div>
+
+      <div class="form-group">
+        <label for="login">Email: </label>
+        <input [(ngModel)]="account.email" #email="ngModel" type="text" class="form-control" name="email" placeholder="Email" id="email"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="login">Country: </label>
+        <select [(ngModel)]="account.countryId" #email="ngModel" class="form-control" name="country" id="country">
+          <option *ngFor="let country of countries" [value]="country.countryId">{{ country.title }}</option>
+        </select>
+      </div>
+
+      <input [disabled]="!manageForm.form.valid" type="submit" style="float: right; margin-left: 10px;" class="btn btn-success"
+        value="Update" />
+    </div>
+  </form>
+</div>
+<br />

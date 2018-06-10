@@ -20,9 +20,9 @@ export class DialogsComponent implements OnInit {
   selectedUser: User = null;
   message: Message;
   messages: Array<Message>;
-  ws = new WebSocket('ws://localhost:5000/ws');
+  // ws = new WebSocket('ws://localhost:5000/ws');
   searchModel: SearchModel;
-  // ws = new WebSocket('ws://ec2-18-191-55-98.us-east-2.compute.amazonaws.com/ws');
+  ws = new WebSocket('ws://ec2-18-191-55-98.us-east-2.compute.amazonaws.com/ws');
 
   page: number;
 

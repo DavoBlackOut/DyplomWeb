@@ -30,6 +30,8 @@ export class AccountComponent implements OnInit {
         this.account = data;
 
         this.router.navigateByUrl('UserPage');
+      } else {
+        alert('Failed logining. Please try again');
       }
     });
   }

@@ -21,6 +21,7 @@ import { CountriesService } from './countries.service';
 import { PostsService } from './posts.service';
 import { WebSocketStatePipe } from './web-socket-state.pipe';
 import { MessagesService } from './messages.service';
+import { ManageComponent } from './manage/manage.component';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { MessagesService } from './messages.service';
     DialogsComponent,
     UserSearchComponent,
     NavigationComponent,
-    WebSocketStatePipe
+    WebSocketStatePipe,
+    ManageComponent
   ],
   imports: [
     BrowserModule,

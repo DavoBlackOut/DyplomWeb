@@ -5,6 +5,7 @@ import { UserPageComponent } from './user-page/user-page.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DialogsComponent } from './dialogs/dialogs.component';
 import { UserSearchComponent } from './user-search/user-search.component';
+import { ManageComponent } from './manage/manage.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/Account', pathMatch: 'full' },
@@ -14,7 +15,8 @@ const routes: Routes = [
   { path: 'Registration', component: RegistrationComponent },
   { path: 'Dialogs', component: DialogsComponent },
   { path: 'Dialogs/:id', component: DialogsComponent },
-  { path: 'Search', component: UserSearchComponent }
+  { path: 'Search', component: UserSearchComponent },
+  { path: 'Manage', component: ManageComponent }
 ];
 
 @NgModule({
