@@ -21,6 +21,7 @@ export class DialogsComponent implements OnInit {
   message: Message;
   messages: Array<Message>;
   ws = new WebSocket('ws://localhost:5000/ws');
+  searchModel: SearchModel;
   // ws = new WebSocket('ws://ec2-18-191-55-98.us-east-2.compute.amazonaws.com/ws');
 
   page: number;
@@ -36,6 +37,7 @@ export class DialogsComponent implements OnInit {
     private route: ActivatedRoute,
     private location: Location) {
     this.messages = new Array<Message>();
+    this.searchModel = new SearchModel();
 
     this.ws.onmessage = this.OnWebSocketMessageEvent();
     this.ws.onclose = x => {
@@ -59,18 +61,18 @@ export class DialogsComponent implements OnInit {
       .getAccount()
       .subscribe(data => this.user = data);
 
+    this.loadUsers();
+  }
+
+  public loadUsers() {
     this
       .usersService
-      .getUsers(new SearchModel())
+      .getUsers(this.searchModel)
       .subscribe(data => {
         this.users = data;
-
-        this.users.forEach(x =>
-          this.messagesService.getUnreadedMessagesCountFromUser(x)
-            .subscribe(messagesCount => x.unreadedMessagesCount = messagesCount));
-
+        this.users.forEach(x => this.messagesService.getUnreadedMessagesCountFromUser(x)
+          .subscribe(messagesCount => x.unreadedMessagesCount = messagesCount));
         const id = +this.route.snapshot.paramMap.get('id');
-
         if (id) {
           this.users.forEach(element => {
             if (element.userId === id) {

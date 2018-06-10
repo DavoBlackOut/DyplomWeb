@@ -29,9 +29,13 @@ export class RegistrationComponent implements OnInit {
 
   registerSubmit(): void {
     this.registrationService.registerAccount(this.account).subscribe(data => {
-      this.status = data.response;
-      alert('Succesfull registration');
-      this.account = new Account();
+      try {
+        this.status = data.response;
+        alert('Succesfull registration');
+        this.account = new Account();
+      } catch {
+        alert('Failed registration');
+      }
     });
   }
 

@@ -1,7 +1,8 @@
 <div class="row text-right" [class]="(ws.readyState | webSocketState).cssclass">{{ (ws.readyState | webSocketState).status }}</div>
 <hr />
 <div class="row">
-  <div id="Users" class="col-4">
+  <div id="Users" class="col-sm-4 col-6">
+    <input type="text" class="form-control" [(ngModel)]="searchModel.searchString" name="searchModel" (input)="loadUsers()" />
     <table class="table">
       <tbody>
         <tr *ngFor="let user of users">
@@ -16,7 +17,7 @@
       </tbody>
     </table>
   </div>
-  <div *ngIf="selectedUser && message" class="col-8">
+  <div *ngIf="selectedUser && message" class="col-sm-8 col-6">
     <div>
       <div>
         <div class="form-horizontal sendMessageForm">
