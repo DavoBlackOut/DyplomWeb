@@ -10,7 +10,7 @@
           <div align="center">
             <div class="image-upload">
               <label for="file-input">
-                <img class="img-fluid" [src]="account.hasPhoto ? '/api/Accounts/GetPhoto' :
+                <img class="img-fluid" [src]="account.hasPhoto ? '/api/Accounts/GetPhoto?id=' + account.accountId :
                   '/assets/images/default-avatar.png'" />
               </label>
 
