@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import { ResponseText } from './Models/ResponseText';
 
+declare var Sha256: any;
+
 @Injectable()
 export class RegistrationService {
 
@@ -11,7 +13,7 @@ export class RegistrationService {
 
   registerAccount(account: Account): Observable<ResponseText> {
     const body = { login: account.login,
-      password: account.password,
+      password: Sha256.hash(account.password),
       name: account.name,
       surname: account.surname,
       email: account.email,

@@ -5,6 +5,8 @@ import { Observable } from 'rxjs/Observable';
 import { ResponseText } from './Models/ResponseText';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
+declare var Sha256: any;
+
 @Injectable()
 export class AuthorizationService {
 
@@ -12,7 +14,7 @@ export class AuthorizationService {
     private cookieService: CookieService) { }
 
   loginAccount(account: Account): Observable<Account> {
-    const body = { login: account.login, password: account.password };
+    const body = { login: account.login, password: Sha256.hash(account.password) };
 
     return this.http.post<Account>('/api/Accounts/Login', body);
   }
@@ -22,7 +24,7 @@ export class AuthorizationService {
   }
 
   updateAccount(account: Account): Observable<Account> {
-    const body = { password: account.password,
+    const body = { password: Sha256.hash(account.password),
       name: account.name, surname: account.surname, email: account.email, countryId: account.countryId };
 
     return this.http.put<Account>('/api/Accounts/UpdateAccount', body);
